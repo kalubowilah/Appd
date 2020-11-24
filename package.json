@@ -26,6 +26,8 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-calendar-picker": "^7.0.3",
+    "react-native-custom-datetimepicker": "^3.0.0",
+    "react-native-datepicker": "^1.7.2",
     "react-native-dropdown-picker": "^3.7.1",
     "react-native-floating-labels": "^1.1.9",
     "react-native-gesture-handler": "~1.7.0",

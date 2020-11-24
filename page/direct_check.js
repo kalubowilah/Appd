@@ -1,18 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image, ScrollView, TextField, Reinput, Button, ToastAndroid } from 'react-native';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image, ScrollView, TextField, Reinput, Button } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 
 
 
-
 export default class  Select_derector extends React.Component {
-
-    constructor(props){
-        super(props)
-        this.state = {date:"2016-05-15"}
-      }
+  constructor(props){
+    super(props)
+    this.state = {date:"2016-05-15"}
+  }
+   
   render() {
     const { navigate } = this.props.navigation;
    
@@ -25,7 +22,7 @@ export default class  Select_derector extends React.Component {
             <Text style={styles.inputTexttopic1}>- Kalubowila -</Text>
 
             <Text style={styles.inputText}>Select Date :</Text>
-            <View style={styles.inputsview} >
+            <View style={styles.inputs} >
             <DatePicker 
        
                     date={this.state.date}
@@ -46,7 +43,7 @@ export default class  Select_derector extends React.Component {
                },
                   dateInput: {
           
-       
+                     borderWidth:0,
                   }
          
                 }}
@@ -54,7 +51,6 @@ export default class  Select_derector extends React.Component {
            />
 
             </View>
-
         
             <View style={styles.buttonsback}>
               <Button

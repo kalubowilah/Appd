@@ -16,7 +16,8 @@ import SeventhPage from './page/anesthesiologist_doctor.js';
 import EgithPage from './page/Surgery_docter.js';
 import Ninthpage from './page/selecter.js';
 import Tenthpage from './page/word_docter.js';
-// import check from './page/director_check.js';
+import Select_derector from './page/direct_check.js';
+
 
 //import all the screens we are going to switch 
 const App = createStackNavigator({
@@ -33,7 +34,7 @@ const App = createStackNavigator({
     Surgery_Doctor: { screen: EgithPage },
     Select: { screen:  Ninthpage },
     word_docter: { screen: Tenthpage },
-    // Patients: { screen: check },
+    Select_derector: { screen:Select_derector },
   },
  // {
    // initialRouteName: 'FirstPag',
