@@ -173,7 +173,7 @@ fetch('http://192.168.1.101/CSTH_PHP/log_user.php', {
 
                <TouchableOpacity>
                     <Text style={styles.forgot1}
-                    onPress={() =>navigate('Select_derector')} 
+                    onPress={() =>navigate('Addpatien')} 
                     >Forgot Password?
                          </Text>
                </TouchableOpacity>

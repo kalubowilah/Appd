@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View ,TextInput,SafeAreaView, ImageBackground,Image,ScrollView,TextField,Reinput,Button, Alert } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import DropDownPicker from 'react-native-dropdown-picker';
-
+import DatePicker from 'react-native-datepicker'
 
 
   // redio button allergies 
@@ -14,8 +14,9 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 export default class wo_docter extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props)
+ 
     this.state = {
       PatientName: '',
       PatientAge: '',
@@ -32,7 +33,7 @@ export default class wo_docter extends React.Component {
       PatientNote : ''
     };
   
-
+   
   }
   componentDidMount() {
     var that = this;
@@ -171,7 +172,6 @@ this.state4 = {
                         
                  </View>
 
-                  
                  {/* <Text style={styles.inputText}>Date :</Text>
                  <View style={styles. inputsview} >
                                <Text 
@@ -367,16 +367,39 @@ this.state4 = {
                         
                  </View>
 
-                 <Text style={styles.inputText}>Surgery date (D/M/Y):</Text>
+                 <Text style={styles.inputText}>Surgery date (Y/M/D):</Text>
                  <View style={styles. inputs} >
-                               <TextInput  
-                                        style={styles.inputText1}
-                                        placeholder="Enter Surgery Date" 
-                                        // keyboardType="decimal-pad"
-                                        placeholderTextColor="#DCDCDC"
-                                        onChangeText={text => this.setState({PatientDate:text})}
+                          
+                 <DatePicker 
+       
+       date={this.state.date1}
+           mode="date"
+         placeholder="select date"
+       format="YYYY-MM-DD"
+       minDate="2019-05-01"
+      maxDate="2030-06-01"
+      confirmBtnText="Confirm"
+      cancelBtnText="Cancel"
+     customStyles={{
+
+       dateIcon: {
+      position: 'absolute',
+      left: 0,
+        top: 4,
+      marginLeft: 0
+  },
+     dateInput: {
+
+        borderWidth:0,
+     }
+
+   }}
+    onDateChange={(date) => {this.setState({date1: date})}}
+    onChangeText={date => this.setState({PatientDate:date})}
+/>
+                                      
                                         
-                              />
+                              
                         
                  </View>
 

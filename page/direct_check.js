@@ -7,7 +7,7 @@ import DatePicker from 'react-native-datepicker'
 export default class  Select_derector extends React.Component {
   constructor(props){
     super(props)
-    this.state = {date:"2016-05-15"}
+    this.state= {date:"2016-05-15"}
   }
    
   render() {
