@@ -1,14 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image, ScrollView, TextField, Reinput, Button } from 'react-native';
-import DatePicker from 'react-native-datepicker'
+import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image, ScrollView, TextField, Reinput, Button,TouchableOpacity} from 'react-native';
 
-
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default class  Select_derector extends React.Component {
-  constructor(props){
-    super(props)
-    this.state= {date:"2016-05-15"}
-  }
+  state = {
+    names: [
+       {
+          id: 0,
+          name: '5566562306565332',
+       },
+       {
+          id: 1,
+          name: 'Susan',
+       },
+      
+    ]
+ }
+ alertItemName = (item) => {
+    alert(item.name)
+ }
    
   render() {
     const { navigate } = this.props.navigation;
@@ -21,37 +32,35 @@ export default class  Select_derector extends React.Component {
             <Text style={styles.inputTexttopic}>Colombo South Teaching Hospital</Text>
             <Text style={styles.inputTexttopic1}>- Kalubowila -</Text>
 
-            <Text style={styles.inputText}>Select Date :</Text>
-            <View style={styles.inputs} >
-            <DatePicker 
-       
-                    date={this.state.date}
-                        mode="date"
-                      placeholder="select date"
-                    format="YYYY-MM-DD"
-                    minDate="2019-05-01"
-                   maxDate="2030-06-01"
-                   confirmBtnText="Confirm"
-                   cancelBtnText="Cancel"
-                  customStyles={{
-         
-                    dateIcon: {
-                   position: 'absolute',
-                   left: 0,
-                     top: 4,
-                   marginLeft: 0
-               },
-                  dateInput: {
-          
-                     borderWidth:0,
-                  }
-         
-                }}
-                 onDateChange={(date) => {this.setState({date: date})}}
-           />
-
-            </View>
-        
+            <Text style={styles.inputText}>Select B.H.T. number :</Text>
+            <View style={styles.list}> 
+            {
+               this.state.names.map((item, index) => (
+                <View >
+                  <View style={styles.inputlist}  >
+                  <Text style={styles.input} 
+                     key = {item.id}
+                    
+                    >
+                    {item.name}
+                    </Text>
+                               <View style={styles.buttonlist}>
+                                <Button 
+                                    onPress = {() => this.alertItemName(item)}
+                                    title="OK"
+                                    color="#32a882"
+                                />
+                               </View >
+                      
+                              
+                    </View >
+                         
+                  </View>
+               ))
+               
+            }
+      
+             </View>
             <View style={styles.buttonsback}>
               <Button
                 
@@ -91,8 +100,18 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 20,
     fontWeight: "bold",
+   // justifyContent: 'center',
 
-
+  },
+  inputlist: {
+    borderWidth: 2,
+    borderColor: '#777',
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 20,
+    fontWeight: "bold",
+    justifyContent: 'center',
+   
   },
   inputText: {
     fontWeight: "bold",
@@ -125,6 +144,14 @@ const styles = StyleSheet.create({
     marginBottom: 50,
 
   },
+  buttonlist: {
+   
+   marginLeft:200 ,
+   // marginRight: 20,
+  //  height: 40,
+    width:50,
+    justifyContent: 'center',
+  },
   inputTexttopic: {
     fontWeight: "bold",
     color: "black",
@@ -143,13 +170,14 @@ const styles = StyleSheet.create({
 
 
   },
-  picker1: {
+  list: {
     alignContent: "center",
     marginLeft: 20,
     marginRight: 20,
-    height: 40,
+    height: 200,
     marginBottom: 10,
     marginTop: 5,
+    
   },
   Subtopic: {
     fontWeight: "bold",
@@ -168,17 +196,5 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontWeight: "bold",
   },
-  redio1: {
-
-
-    borderColor: '#777',
-    marginRight: 40,
-    marginLeft: 40,
-    marginBottom: 20,
-    fontWeight: "bold",
-  },
-  datePickerStyle: {
-    width: 200,
-    marginTop: 20,
-  },
+  
 });

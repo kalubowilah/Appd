@@ -12,6 +12,11 @@ import DatePicker from 'react-native-datepicker'
    
   ];
 
+
+
+
+  
+
 export default class wo_docter extends React.Component {
 
   constructor(props) {
@@ -125,6 +130,22 @@ export default class wo_docter extends React.Component {
    
   }
 
+ // title bar 
+  static navigationOptions = {  
+    title: 'Home',  
+    headerStyle: {  
+        backgroundColor: "#32a882",  
+    },  
+    //headerTintColor: '#0ff',  
+    headerTitleStyle: {  
+        fontWeight: 'bold',  
+    },  
+};  
+
+
+
+
+
   render(){
     const { navigate } = this.props.navigation;
 //picker (Allergies)
@@ -144,6 +165,8 @@ this.state4 = {
   Permission: 'Ready to Surgery'
 }
 
+
+
     
     return (
       <SafeAreaView>
@@ -151,7 +174,7 @@ this.state4 = {
        <View style={styles.container}>
 
          
-       <Text style={styles.inputTexttopic}>Admisson of patients</Text> 
+       <Text style={styles.inputTexttopic}>Admission of patients</Text> 
        <Text style={styles.inputTexttopic1}>- Kalubowila -</Text> 
 
        
@@ -159,7 +182,7 @@ this.state4 = {
 
 
 
-             <Text style={styles.Subtopic}> Admisson information </Text> 
+             <Text style={styles.Subtopic}> Admission information </Text> 
 
               <Text style={styles.inputText}>Editer name :</Text> 
                 <View style={styles.inputsview} >
