@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image, ScrollView, TextField, Reinput, Button, ToastAndroid,  Alert } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { log } from 'react-native-reanimated';
 
 
 export default class Director extends React.Component {
@@ -10,62 +11,100 @@ export default class Director extends React.Component {
   constructor(props) {
  
     super(props)
+    // console.log(this.props.navigation.state.params.id);
+    this.getRecord = this.getRecord.bind(this)
  
     this.state = {
       position:'',
+      status: '',
+      id: this.props.navigation.state.params.id,
+      // doctor:'',    
     }
  
   }
- 
-  GetValueFunction = () =>{
 
-    fetch('http://192.168.1.101/CSTH_PHP/director.php', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: this.state.name,
-        age: this.state.age,
-        address: this.state.address,
-        sex: this.state.sex,
-        allergies: this.state.allergies,
-        bht: this.state.bht,
-        date: this.state.date,
-        doctor: this.state.doctor,
-        theatre: this.state.theater,
-        time: this.state.time,
-        type: this.state.type,
-        ward: this.state.ward
-    
-    })
-  
-  }).then((response) => response.json())
-        .then((responseJson) => {
-  
-           console.log(responseJson.id)
-           this.setState({id : responseJson.id})
-        })
-        
-
- 
- const {position}  = this.state ;
-
-if(position==""){
-  Alert.alert("Select your parmission");
-}else{
-  Alert.alert("Thank DB develop");
-}
-
- 
-    //this.props.navigation.push('Registration');
+  componentDidMount(){
+    this.getRecord()
   }
+
+
+
+  async getRecord() {
+    // return console.log(this.state.id);
+    fetch('http://192.168.1.101/CSTH_PHP/view_single.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: this.state.id
+      })
   
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+      this.setState({
+        // id: responseJson.id,
+        doctor: responseJson.doctor,
+        created_at: responseJson.created_at,
+        name: responseJson.name,
+        age: responseJson.age,
+        address: responseJson.address,
+        sex: responseJson.sex,
+        allergies: responseJson.allergies,
+        bht: responseJson.bht,
+        ward: responseJson.ward,
+        doctor: responseJson.doctor,
+        type: responseJson.type,
+        time: responseJson.time,
+        theater: responseJson.theater,
+        date: responseJson.date,
+        note: responseJson.note,
+        created_by: responseJson.created_by,
+      })
+      // console.log(this.state.doctor + ' doc');
+  
+    })
+    .catch((err) => {
+      console.log(err);
+      console.log('err');
+    })
+   }
 
-
-
-
+   setStatus = () => {
+      // return console.log(this.state.status);
+      fetch('http://192.168.1.101/CSTH_PHP/change_status.php', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: this.state.id,
+          status: this.state.status
+        })
+    
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+        // this.setState({
+        //   // id: responseJson.id,
+          
+        // })
+        // console.log(this.state.doctor + ' doc');
+        this.props.navigation.pop()
+    
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('err');
+      })
+     
+   }
+ 
 
   render() {
     const { navigate } = this.props.navigation;
@@ -89,34 +128,27 @@ if(position==""){
               <Text
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
-                onChangeText={text => this.setState({ password: text })}/>
+                
+                onChangeText={text => this.setState({ password: text })}>{this.state.created_by}</Text> 
             </View>
 
-            <Text style={styles.inputText}>Entered Date :</Text>
+            <Text style={styles.inputText}>Entered Date & Time :</Text>
             <View style={styles.inputsview} >
               <Text
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+              >{this.state.created_at}</Text>
             </View>
 
-            <Text style={styles.inputText}>Entered Time :</Text>
-            <View style={styles.inputsview} >
-              <Text
-                style={styles.inputText1}
-                placeholderTextColor="#DCDCDC"
-                onChangeText={text => this.setState({ password: text })}
-              />
-            </View>
             <Text style={styles.Subtopic}>Permission to Surgery </Text>
             <Text style={styles.inputText}>Add your Permission:</Text>
          <View style={styles.picker1}> 
             <DropDownPicker
                        items={[ 
                            // {label: 'Select', value: 'Select',  hidden: true},
-                            {label: 'Ready to Surgery', value: 'Ready to Surgery' },
-                            {label: 'Problem to Surgery', value: 'Problem to Surgery'},
+                            {label: 'Ready to Surgery', value: 'READY' },
+                            {label: 'Problem to Surgery', value: 'PROBLEM'},
                         
                     ]}
                        defaultValue={this.state.Permission}
@@ -127,7 +159,7 @@ if(position==""){
                        justifyContent: 'flex-start'
                     }}
                           dropDownStyle={{backgroundColor: '#fafafa'}}
-                          onChangeItem={item=> this.setState({position:item.value})}
+                          onChangeItem={item=> this.setState({status:item.value})}
                      >
              </DropDownPicker>
              </View>
@@ -140,7 +172,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.name}</Text>
             </View>
 
             <Text style={styles.inputText}>Patients age (years) :</Text>
@@ -149,7 +181,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+               > {this.state.age}</Text>
             </View>
 
             <Text style={styles.inputText}>Patients address :</Text>
@@ -158,7 +190,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.address}</Text>
             </View>
 
             <Text style={styles.inputText}>Gender (male / female) :</Text>
@@ -167,7 +199,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.sex}</Text>
             </View>
 
             <Text style={styles.inputText}>Allergies :</Text>
@@ -176,7 +208,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.allergies}</Text>
             </View>
 
 
@@ -188,7 +220,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.bht}</Text>
             </View>
 
             <Text style={styles.inputText}>Ward :</Text>
@@ -197,7 +229,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.ward}</Text>
             </View>
 
             <Text style={styles.inputText}>Surgery Doctor name :</Text>
@@ -206,7 +238,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.doctor}</Text>
             </View>
 
             <Text style={styles.inputText}>Surgery type :</Text>
@@ -215,7 +247,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.type}</Text>
             </View>
 
             <Text style={styles.inputText}>Selected Surgery theatre:</Text>
@@ -224,7 +256,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.theater}</Text>
             </View>
 
             <Text style={styles.inputText}>Surgery time (H):</Text>
@@ -233,7 +265,7 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.time}</Text>
             </View>
 
             <Text style={styles.inputText}>Surgery date (D/M/Y):</Text>
@@ -242,14 +274,14 @@ if(position==""){
                 style={styles.inputText1}
                 placeholderTextColor="#DCDCDC"
                 onChangeText={text => this.setState({ password: text })}
-              />
+                > {this.state.date}</Text>
             </View>
 
 
             <View style={styles.buttons}>
               <Button
                 title="Submit"
-                onPress={this.GetValueFunction}
+                onPress={this.setStatus}
                 color="#32a882"
               />
             </View>

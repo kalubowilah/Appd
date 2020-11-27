@@ -2,29 +2,75 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image, ScrollView, TextField, Reinput, Button,TouchableOpacity} from 'react-native';
 
 import DropDownPicker from 'react-native-dropdown-picker';
+import { log } from 'react-native-reanimated';
 
 export default class  Select_derector extends React.Component {
-  state = {
-    names: [
-       {
-          id: 0,
-          name: '5566562306565332',
-       },
-       {
-          id: 1,
-          name: 'Susan',
-       },
-      
-    ]
- }
+
+  
+
  alertItemName = (item) => {
-    alert(item.name)
+    alert(item)
+ }
+
+ pushNext = (id) => {
+  //  alert(id)
+  this.props.navigation.push('Director' , {id}); 
+ }
+
+
+  constructor(props){
+   super(props)
+   console.log(1);
+   this.state = {
+     names: []
+   }
+   this.getPatients = this.getPatients.bind(this)
+    
+ }
+
+ componentDidMount() {
+   console.log(111);
+   this.getPatients()
+  
+ }
+
+ async getPatients() {
+  fetch('http://192.168.1.101/CSTH_PHP/show_all.php', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+    // console.log(responseJson);
+    this.setState({names: responseJson})
+
+  })
+  .catch((err) => {
+    console.log(err);
+    console.log('err');
+  })
+ }
+
+
+ renderLoading(){
+
+   return (
+    <View><Text style={styles.inputTexttopic}>Colombo South Teaching Hospital</Text></View>
+   )
  }
    
   render() {
     const { navigate } = this.props.navigation;
-   
+    {this.retrieveData}
+    
     return (
+
+
+      
       <SafeAreaView>
         <ScrollView>
           <View style={styles.container}>
@@ -42,12 +88,13 @@ export default class  Select_derector extends React.Component {
                      key = {item.id}
                     
                     >
-                    {item.name}
+                    {/* {item.id} */}
+                    New Operation Request
                     </Text>
                                <View style={styles.buttonlist}>
                                 <Button 
-                                    onPress = {() => this.alertItemName(item)}
-                                    title="OK"
+                                    onPress = {() => this.pushNext(item.id)}
+                                    title="View"
                                     color="#32a882"
                                 />
                                </View >
@@ -61,22 +108,7 @@ export default class  Select_derector extends React.Component {
             }
       
              </View>
-            <View style={styles.buttonsback}>
-              <Button
-                
-                title="OK"
-                color="#32a882"
-              />
-            </View >
- 
-
-            <View style={styles.buttonsback}>
-              <Button
-                onPress={() => navigate('Welcome')}
-                title="Back"
-                color="#32a882"
-              />
-            </View >
+            
  
           </View>
 

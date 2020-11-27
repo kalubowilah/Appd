@@ -64,13 +64,15 @@ fetch('http://192.168.1.101/CSTH_PHP/log_user.php', {
            this.setState({user_id : responseJson.user_id})
 
           // return console.log(positionJSON)
+          user_id = responseJson.user_id
+          // return console.log(user_id);
 
           switch(responseJson.position) {
   case 'Ward_doctors':
     this.props.navigation.push('Addpatien');
     break;
   case 'Director':
-    this.props.navigation.push('Director');
+    this.props.navigation.push('Select_derector');
     break;
     case 'Anesthesiologist Doctor':
       this.props.navigation.push('Anesthesiologist_Doctor');
@@ -79,7 +81,7 @@ fetch('http://192.168.1.101/CSTH_PHP/log_user.php', {
      this.props.navigation.push('Surgery_Doctor');
       break;
       case 'Medical Officer':
-        this.props.navigation.push('Select');
+        this.props.navigation.push('Select', {user_id});
         break;
         case 'Nursing Staff':
           this.props.navigation.push('Nursing');

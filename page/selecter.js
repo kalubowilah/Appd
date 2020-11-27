@@ -4,13 +4,22 @@ import { StyleSheet, Text, View ,TextInput,SafeAreaView, ImageBackground,Image,S
 
 export default class wo_docter extends React.Component {
 
- 
+  constructor(props){
+    super(props)
+    this.state= {
+    id: this.props.navigation.state.params.user_id
+    }
+      
+    // console.log(this.props.navigation.state.params.user_id + '  uid');
+  }
   
 
   render(){
    
     const { navigate } = this.props.navigation;
+    id= this.state.id
     return (
+      
       
       
        <View style={styles.container}>
@@ -19,7 +28,7 @@ export default class wo_docter extends React.Component {
                  <View style={styles.buttons}>
                        <Button
                         title="Admission of patients"
-                        onPress={() =>navigate('Addpatien')}
+                        onPress={() =>navigate('Addpatien', {id} )}
                          color="#32a882" 
                          
                       />

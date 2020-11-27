@@ -21,6 +21,8 @@ export default class wo_docter extends React.Component {
 
   constructor(props) {
     super(props)
+    // console.log('wo doc id' + this.props.navigation.state.params.id);
+
  
     this.state = {
       PatientName: '',
@@ -35,7 +37,8 @@ export default class wo_docter extends React.Component {
       PatientTime : '',
       PatientType : '',
       PatientDate : '',
-      PatientNote : ''
+      PatientNote : '',
+      id: this.props.navigation.state.params.id
     };
   
    
@@ -87,7 +90,7 @@ export default class wo_docter extends React.Component {
       this.state.PatientDate=== ''  ||
       this.state.PatientNote=== ''
     )  {
-      return Alert.alert('Please fill all surgery information')
+      // return Alert.alert('Please fill all surgery information')
     }
 
    
@@ -112,7 +115,8 @@ export default class wo_docter extends React.Component {
         time: this.state.PatientTime,
         type: this.state.PatientType,
         ward: this.state.PatientWard,
-        note: this.state.PatientNote
+        note: this.state.PatientNote,
+        created_by: this.state.id
     
       })
     
@@ -184,7 +188,7 @@ this.state4 = {
 
              <Text style={styles.Subtopic}> Admission information </Text> 
 
-              <Text style={styles.inputText}>Editer name :</Text> 
+              {/* <Text style={styles.inputText}>Editer name :</Text> 
                 <View style={styles.inputsview} >
                                <Text  
                                      style={styles.inputText1}
@@ -193,7 +197,7 @@ this.state4 = {
                                         onChangeText={text => this.setState({password:text})}
                               > {this.props.user_id} </Text>
                         
-                 </View>
+                 </View> */}
 
                  {/* <Text style={styles.inputText}>Date :</Text>
                  <View style={styles. inputsview} >
