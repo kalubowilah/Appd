@@ -78,10 +78,10 @@ export default class  Select_derector extends React.Component {
             <Text style={styles.inputTexttopic}>Colombo South Teaching Hospital</Text>
             <Text style={styles.inputTexttopic1}>- Kalubowila -</Text>
 
-            <Text style={styles.inputText}>Select B.H.T. number :</Text>
-            <View style={styles.list}> 
+            {/* <View style={styles.list}>  */}
             {
-               this.state.names.map((item, index) => (
+              this.state.names.length > 0
+              ?  this.state.names.map((item, index) => (
                 <View >
                   <View style={styles.inputlist}  >
                   <Text style={styles.input} 
@@ -103,11 +103,13 @@ export default class  Select_derector extends React.Component {
                     </View >
                          
                   </View>
+                  
                ))
+               :<Text style={styles.inputTexttopic}>Noo Pending Items Available</Text>
                
             }
       
-             </View>
+             {/* </View> */}
             
  
           </View>

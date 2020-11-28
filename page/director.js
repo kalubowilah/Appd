@@ -95,7 +95,7 @@ export default class Director extends React.Component {
           
         // })
         // console.log(this.state.doctor + ' doc');
-        this.props.navigation.pop()
+        this.props.navigation.push('Select_derector');
     
       })
       .catch((err) => {
