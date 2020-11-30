@@ -14,7 +14,7 @@ export default class  Select_derector extends React.Component {
 
  pushNext = (id) => {
   //  alert(id)
-  this.props.navigation.push('Director' , {id}); 
+  this.props.navigation.push('Edit_Director_Reject' , {id}); 
  }
 
 
@@ -22,8 +22,10 @@ export default class  Select_derector extends React.Component {
    super(props)
    console.log(1);
    this.state = {
-     names: []
+     names: [],
+     user_id: this.props.navigation.state.params.id
    }
+   
    this.getPatients = this.getPatients.bind(this)
     
  }
@@ -35,12 +37,15 @@ export default class  Select_derector extends React.Component {
  }
 
  async getPatients() {
-  fetch('http://192.168.1.101/CSTH_PHP/show_all.php', {
-    method: 'GET',
+  fetch('http://192.168.1.101/CSTH_PHP/fetch_director_rejects.php', {
+    method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({
+        'user_id' : this.state.user_id
+    })
 
   })
   .then((response) => response.json())

@@ -1,16 +1,32 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
     include_once './DBConfig.php';
 
     // if($conn){
     //     echo 'sfsf'
     // }
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json,true);
+
+    $user_id = $obj['user_id'];
+
+    $query1 = 
+    "
+    SELECT * FROM user_reg WHERE id='$user_id'; 
+    ";
+    $result1 = mysqli_query($conn, $query1);
+    while($row = mysqli_fetch_assoc($result1)){
+        $row = extract($row);
+        $created_by_name = $name;
+    }
 
     $query = 
     "
-    SELECT * FROM patient_details WHERE status='PENDING'; 
+    SELECT * FROM patient_details WHERE status='DENIED' AND created_by='$created_by_name' ; 
     ";
 
     $result = mysqli_query($conn, $query);

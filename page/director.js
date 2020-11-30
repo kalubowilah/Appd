@@ -63,6 +63,7 @@ export default class Director extends React.Component {
         date: responseJson.date,
         note: responseJson.note,
         created_by: responseJson.created_by,
+        updated_at: responseJson.updated_at,
       })
       // console.log(this.state.doctor + ' doc');
   
@@ -96,6 +97,7 @@ export default class Director extends React.Component {
         // })
         // console.log(this.state.doctor + ' doc');
         this.props.navigation.push('Select_derector');
+        // this.props.navigation.pop();
     
       })
       .catch((err) => {
@@ -136,9 +138,7 @@ export default class Director extends React.Component {
             <View style={styles.inputsview} >
               <Text
                 style={styles.inputText1}
-                placeholderTextColor="#DCDCDC"
-                onChangeText={text => this.setState({ password: text })}
-              >{this.state.created_at}</Text>
+              >{this.state.updated_at}</Text>
             </View>
 
             <Text style={styles.Subtopic}>Permission to Surgery </Text>
@@ -276,7 +276,8 @@ export default class Director extends React.Component {
                 onChangeText={text => this.setState({ password: text })}
                 > {this.state.date}</Text>
             </View>
-
+            
+            
 
             <View style={styles.buttons}>
               <Button
@@ -288,11 +289,11 @@ export default class Director extends React.Component {
 
             <View style={styles.buttonsback}>
               <Button
-                onPress={() => navigate('Welcome')}
+                onPress={() => navigate('Select_derector')}
                 title="Back"
                 color="#32a882"
               />
-            </View >
+            </View>
             
           </View>
         </ScrollView>

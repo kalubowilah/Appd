@@ -10,7 +10,7 @@
 
     $query = 
     "
-    SELECT * FROM patient_details WHERE status='PENDING'; 
+    SELECT * FROM patient_details WHERE status='PERMITTED'; 
     ";
 
     $result = mysqli_query($conn, $query);

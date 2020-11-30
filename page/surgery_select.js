@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, SafeAreaView, ImageBackground, Image
 import DropDownPicker from 'react-native-dropdown-picker';
 import { log } from 'react-native-reanimated';
 
-export default class  Select_derector extends React.Component {
+export default class SurgeonCheck  extends React.Component {
 
   
 
@@ -14,7 +14,7 @@ export default class  Select_derector extends React.Component {
 
  pushNext = (id) => {
   //  alert(id)
-  this.props.navigation.push('Director' , {id}); 
+  this.props.navigation.push('Surgery_Doctor' , {id}); 
  }
 
 
@@ -35,7 +35,7 @@ export default class  Select_derector extends React.Component {
  }
 
  async getPatients() {
-  fetch('http://192.168.1.101/CSTH_PHP/show_all.php', {
+  fetch('http://192.168.1.101/CSTH_PHP/show_all_sur.php', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -111,12 +111,8 @@ export default class  Select_derector extends React.Component {
       
              {/* </View> */}
             
- 
+             
           </View>
-
-
-          
-
           <View style={styles.buttonsback}>
                <Button 
                        onPress={() =>navigate('Welcome')}
@@ -125,8 +121,6 @@ export default class  Select_derector extends React.Component {
                        
               />
               </View>
-
-
         </ScrollView>
       </SafeAreaView>
     );

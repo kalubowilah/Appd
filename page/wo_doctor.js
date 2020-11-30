@@ -181,49 +181,7 @@ this.state4 = {
        <Text style={styles.inputTexttopic}>Admission of patients</Text> 
        <Text style={styles.inputTexttopic1}>- Kalubowila -</Text> 
 
-       
-      
-
-
-
              <Text style={styles.Subtopic}> Admission information </Text> 
-
-              {/* <Text style={styles.inputText}>Editer name :</Text> 
-                <View style={styles.inputsview} >
-                               <Text  
-                                     style={styles.inputText1}
-                                        placeholder="Name" 
-                                        placeholderTextColor="#DCDCDC"
-                                        onChangeText={text => this.setState({password:text})}
-                              > {this.props.user_id} </Text>
-                        
-                 </View> */}
-
-                 {/* <Text style={styles.inputText}>Date :</Text>
-                 <View style={styles. inputsview} >
-                               <Text 
-                                        style={styles.inputText1}
-                                        placeholderTextColor="#DCDCDC"
-                                        onChangeText={text => this.setState({password:text})}
-                              >{this.state.date}</Text>
-                        
-                 </View> */}
-
-
-
-                 
-
-                 {/* <Text style={styles.inputText}>Time</Text>
-                 <View style={styles. inputsview} >
-                               <Text 
-                                        style={styles.inputText1}
-                                       
-                                        placeholderTextColor="#DCDCDC"
-                                        onChangeText={text => this.setState({password:text})}
-                              >{this.state.time}</Text>
-                        
-                 </View> */}
-
 
 
                  <Text style={styles.Subtopic}>Patient information </Text> 
@@ -421,8 +379,8 @@ this.state4 = {
      }
 
    }}
-    onDateChange={(date) => {this.setState({date1: date})}}
-    onChangeText={date => this.setState({PatientDate:date})}
+    onDateChange={(date) => {this.setState({PatientDate: date})}}
+    // onChangeText={date => this.setState({PatientDate:date})}
 />
                                       
                                         

@@ -28,14 +28,24 @@ $type = $obj['type'];
 $date = $obj['date'];
 $theater = $obj['theatre'];
 $note = $obj['note'];
+$created_by = $obj['created_by'];
 
 
+$query1 = 
+"
+SELECT * FROM user_reg WHERE id='$created_by'; 
+";
+$result1 = mysqli_query($conn, $query1);
+while($row = mysqli_fetch_assoc($result1)){
+    $row = extract($row);
+    $created_by_name = $name;
 
+}
  
 $query = 
     "
-    INSERT INTO patient_details ( name, age, address, sex, allergies, bht, doctor, ward, time, type, date, theater, note)
-    VALUES ( '$name', '$age', '$address', '$sex', '$allergies', '$bht', '$doctor', '$ward', '$time', '$type', '$date', '$theater', '$note');
+    INSERT INTO patient_details ( name, age, address, sex, allergies, bht, doctor, ward, time, type, date, theater, note, created_by)
+    VALUES ( '$name', '$age', '$address', '$sex', '$allergies', '$bht', '$doctor', '$ward', '$time', '$type', '$date', '$theater', '$note', '$created_by_name');
     ";
     // "
     // INSERT INTO user_reg (name,  email, password)
@@ -46,7 +56,8 @@ $result = $conn->query($query);
 if(!$result){
     echo json_encode(
 
-        mysqli_error($conn)
+        // mysqli_error($conn)
+        array('message' => 'Error')
     );
     return;
 }

@@ -75,16 +75,18 @@ fetch('http://192.168.1.101/CSTH_PHP/log_user.php', {
     this.props.navigation.push('Select_derector');
     break;
     case 'Anesthesiologist Doctor':
-      this.props.navigation.push('Anesthesiologist_Doctor');
+      // this.props.navigation.push('Anesthesiologist_Doctor');
+      this.props.navigation.push('Anesthesiologist_Select');
+
       break;
       case 'Surgery Doctor':
-     this.props.navigation.push('Surgery_Doctor');
+     this.props.navigation.push('surgery_select');
       break;
       case 'Medical Officer':
         this.props.navigation.push('Select', {user_id});
         break;
         case 'Nursing Staff':
-          this.props.navigation.push('Nursing');
+          this.props.navigation.push('Nursing_Check');
           break;
           default:
             Alert.alert("Invalid Credentials");
@@ -99,7 +101,7 @@ fetch('http://192.168.1.101/CSTH_PHP/log_user.php', {
 
     }
 
-
+   
 
   render(){
     const { navigate } = this.props.navigation;

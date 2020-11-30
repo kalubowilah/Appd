@@ -14,6 +14,7 @@ export default class wo_docter extends React.Component {
   }
   
 
+
   render(){
    
     const { navigate } = this.props.navigation;
@@ -34,13 +35,35 @@ export default class wo_docter extends React.Component {
                       />
                    </View>
 
+                   <View View style={styles.buttons}>
+                       <Button
+                        title="Rejected by Director"
+                        onPress={() =>navigate('Director_Rejects', {id} )}
+                         color="#32a882" 
+                         
+                      />
+                   </View>
+
+                   <View View style={styles.buttons}>
+                       <Button
+                        title="Rejected by Anesthesiologist"
+                        onPress={() =>navigate('Ane_Rejects', {id} )}
+                         color="#32a882" 
+                         
+                      />
+                   </View>
+
                    <View style={styles.buttonsback}>
-               <Button 
+               {/* <Button 
                        onPress={() =>navigate('word_docter')}
                        title="Patient details"
                        color="#32a882" 
                        
-              />
+              /> */}
+
+                    
+
+              
 
              <View style={styles.buttonsback1}>
               <Button
@@ -48,9 +71,9 @@ export default class wo_docter extends React.Component {
                 title="Back"
                 color="#32a882"
               />
-            </View >
+            </View>
         
-              </View >
+              </View>
        </View>
 
                   
